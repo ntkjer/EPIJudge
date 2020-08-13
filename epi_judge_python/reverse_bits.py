@@ -25,14 +25,14 @@ def reverse_bits(x: int) -> int:
     reversed = _REVERSED_VALUES
     A = x & bit_mask 
     B = x >> mask_size & bit_mask 
-    c = x >> (2 * mask_size) & bit_mask
+    C = x >> (2 * mask_size) & bit_mask
     D = x >> (3 * mask_size) & bit_mask
-    print("testing x\n")
-    print(bin(x))
-    print(bin(A))
-    print(bin(B))
-    print(bin(C))
-    print(bin(D))
+    #print("testing x\n")
+    #print(bin(x))
+    #print(bin(A))
+    #print(bin(B))
+    #print(bin(C))
+    #print(bin(D))
     return (reversed[A] << (3 * mask_size) |
             reversed[B] << (2 * mask_size) |
             reversed[C] << (mask_size) |
