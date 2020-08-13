@@ -1,7 +1,7 @@
 from test_framework import generic_test
 
 
-def parity(x: int) -> int:
+def parity_not_optimal(x: int) -> int:
     """
     Tn = O(k)
     
@@ -19,6 +19,36 @@ def parity(x: int) -> int:
         result ^= 1
         x &= x - 1
     return result
+
+def parity(x : int) -> int:
+    """
+    Tn = O(lg n)
+
+    XOR is both associative and cumulative. We can split the input word 'x' 
+
+    E.g.    x   =   11010111
+    x's parity (0) is equal to:
+            a   =   1101    p = 0
+            b   =   0111    p = 0 
+    p(a):0 XOR p(b):0 =     p = 0
+
+    But this is the same as:
+            x   =   11010111
+            a   =   11          
+            b   =     01
+            c   =       01
+            d   =         11
+    
+    We keep dividing the binary representation with a right-shift until we extract the least-most significant bit.
+    we return the reuslt by anding the result with 0x1, returning 1 if even and 0 if odd.
+    """
+    x ^= x >> 32
+    x ^= x >> 16
+    x ^= x >> 8
+    x ^= x >> 4
+    x ^= x >> 2
+    x ^= x >> 1
+    return x & 0x1
 
 
 if __name__ == '__main__':
